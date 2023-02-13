@@ -13,15 +13,21 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
   function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+    setIsEditAvatarPopupOpen(true);
   }
 
   function handleAddPlaceClick() {
-    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+    setIsAddPlacePopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
   }
 
   return (
@@ -31,7 +37,7 @@ function App() {
         <Main onEditProfile={handleEditProfileClick} onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} />
         <Footer />
 
-        <PopupWithForm title="Редактировать профиль" name="edit-profile" btnText="Сохранить" form="profile" isOpen={isEditProfilePopupOpen}>
+        <PopupWithForm title="Редактировать профиль" name="edit-profile" btnText="Сохранить" form="profile" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
           <label className="form__label">
             <input type="text" className="form__item" id="name" name="name" placeholder="Ваше имя" minLength="2" maxLength="40" required />
             <span className="form__item-error name-error"></span>
@@ -42,14 +48,14 @@ function App() {
           </label>
         </PopupWithForm>
 
-        <PopupWithForm title="Обновить аватар" name="add-avatar" btnText="Сохранить" container="popup__avatar-container" form="avatar" isOpen={isEditAvatarPopupOpen}>
+        <PopupWithForm title="Обновить аватар" name="add-avatar" btnText="Сохранить" container="popup__avatar-container" form="avatar" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
           <label className="form__label">
             <input type="url" className="form__item" id="avatar" name="avatar" placeholder="Ссылка на картинку" required />
             <span className="form__item-error avatar-error"></span>
           </label>
         </PopupWithForm>
 
-        <PopupWithForm title="Новое место" name="add-image" btnText="Создать" form="card" isOpen={isAddPlacePopupOpen}>
+        <PopupWithForm title="Новое место" name="add-image" btnText="Создать" form="card" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
           <label className="form__label">
             <input type="text" className="form__item" id="imagename" name="imagename" placeholder="Название" minLength="2" maxLength="30" required />
             <span className="form__item-error imagename-error"></span>
@@ -60,7 +66,7 @@ function App() {
           </label>
         </PopupWithForm>
 
-        <PopupWithForm title="Вы уверены?" name="delete-card" btnText="Да" container="popup__delete-container" form="deliting" />
+        <PopupWithForm title="Вы уверены?" name="delete-card" btnText="Да" container="popup__delete-container" form="deliting" onClose={closeAllPopups} />
       {/* <div className="popup popup_type_delete-card">
           <div className="popup__container popup__delete-container">
             <button className="popup__close-button" type="button"></button>
