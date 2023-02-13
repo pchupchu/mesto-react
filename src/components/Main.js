@@ -3,7 +3,7 @@ import kusto from '../images/kusto.jpg';
 import { api } from '../utils/Api';
 import Card from './Card';
 
-function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const [userName, setUserInfo] = React.useState('Жак Ив Кусто');
   const [userDescription, setUserDescription] = React.useState('Исследователь океана');
   const [userAvatar, setUserAvatar] = React.useState(`${kusto}`);
@@ -50,7 +50,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
     <section className="elements">
       <ul className="elements__list">
         {cards.map((card, i) => {
-          return <Card key={i} card={card} />
+          return <Card key={i} card={card} onCardClick={onCardClick} />
         })}
       </ul>
     </section>
