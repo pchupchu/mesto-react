@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
@@ -37,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      
+      <div className="root">
         <Header />
         <Main onEditProfile={handleEditProfileClick} onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} />
         <Footer />
@@ -74,7 +73,7 @@ function App() {
         <PopupWithForm title="Вы уверены?" name="delete-card" btnText="Да" container="popup__delete-container" classTitle="title-to-delete" form="deliting" />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-     
+      </div>
     </div>
   );
 }
