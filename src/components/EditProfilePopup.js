@@ -6,7 +6,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
 
-  // Обработчик изменения инпута обновляет стейт
   function handleChangeName(evt) {
     setName(evt.target.value);
   }
@@ -15,20 +14,18 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     setDescription(evt.target.value);
   }
 
-  // Подписка на контекст
   const user = React.useContext(CurrentUserContext);
 
-  // После загрузки текущего пользователя из API
-  // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
-    setName(user.name);
-    setDescription(user.about);
+    if (JSON.stringify(user) !== "{}") {
+      setName(user.name);
+      setDescription(user.about);
+    }
   }, [user]);
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name,
       about: description,

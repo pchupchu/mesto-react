@@ -1,6 +1,8 @@
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/Api";
+import AddPlacePopup from "./AddPlacePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -41,8 +43,32 @@ function App() {
   }, []);
 
   function handleUpdateUser(user) {
-    api.setProfileInfo(user).then((res) => {
-      setCurrentUser(res);
+    api
+      .setProfileInfo(user)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
+  function handleUpdateAvatar(obj) {
+    api
+      .setProfileAvatar(obj.avatar)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
+  function handleAddPlaceSubmit(card) {
+    api.setNewCard(card).then((res) => {
+      setCards([res, ...cards]);
       closeAllPopups();
     });
   }
@@ -50,15 +76,27 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then(() => {
-      setCards((state) => state.filter((c) => c._id !== card._id));
-    });
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
   }
 
   function handleEditProfileClick() {
@@ -106,62 +144,17 @@ function App() {
             onUpdateUser={handleUpdateUser}
           />
 
-          <PopupWithForm
-            title="Обновить аватар"
-            name="add-avatar"
-            btnText="Сохранить"
-            container="popup__avatar-container"
-            classTitle="avatar-title"
-            form="avatar"
+          <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
-          >
-            <label className="form__label">
-              <input
-                type="url"
-                className="form__item"
-                id="avatar"
-                name="avatar"
-                placeholder="Ссылка на картинку"
-                required
-              />
-              <span className="form__item-error avatar-error"></span>
-            </label>
-          </PopupWithForm>
+            onUpdateAvatar={handleUpdateAvatar}
+          />
 
-          <PopupWithForm
-            title="Новое место"
-            name="add-image"
-            btnText="Создать"
-            form="card"
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-          >
-            <label className="form__label">
-              <input
-                type="text"
-                className="form__item"
-                id="imagename"
-                name="imagename"
-                placeholder="Название"
-                minLength="2"
-                maxLength="30"
-                required
-              />
-              <span className="form__item-error imagename-error"></span>
-            </label>
-            <label className="form__label">
-              <input
-                type="url"
-                className="form__item"
-                id="imageurl"
-                name="imageurl"
-                placeholder="Ссылка на картинку"
-                required
-              />
-              <span className="form__item-error imageurl-error"></span>
-            </label>
-          </PopupWithForm>
+            onAddPlace={handleAddPlaceSubmit}
+          />
 
           <PopupWithForm
             title="Вы уверены?"
