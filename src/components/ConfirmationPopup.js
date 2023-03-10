@@ -14,7 +14,7 @@ function ConfirmationPopup({ isOpen, onClose, onCardDelete, removedCard }) {
       btnText="Да"
       container="popup__delete-container"
       classTitle="title-to-delete"
-      form="deliting"
+      form="deleting"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
