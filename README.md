@@ -17,4 +17,6 @@
 
 ![я узнала о реакте пару недель назад](https://www.meme-arsenal.com/memes/4ed140b763d544f2ea734d3489f7e1cd.jpg)
 
+[сам проект находится здесь](https://pchupchu.github.io/mesto-react/)
+
 Спасибо за внимание.
