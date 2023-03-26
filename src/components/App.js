@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/Api";
 import AddPlacePopup from "./AddPlacePopup";
@@ -9,9 +8,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import Footer from "./Footer";
 import Header from "./Header";
 import ImagePopup from "./ImagePopup";
-import Login from "./Login";
 import Main from "./Main";
-import Register from "./Register";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -143,34 +140,15 @@ function App() {
         <div className="root">
           <Header />
 
-          <Routes>
-            <Route path="sign-up" element={<Register />} />
-            <Route path="sign-in" element={<Login />} />
-            <Route
-              path="/"
-              element={
-                <Main
-                  onEditProfile={handleEditProfileClick}
-                  onEditAvatar={handleEditAvatarClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onCardClick={handleCardClick}
-                  onCardLike={handleCardLike}
-                  onSubmitCardDelete={handleConfirmationClick}
-                  cards={cards}
-                />
-              }
-            />
-          </Routes>
-
-          {/* <Main
-              onEditProfile={handleEditProfileClick}
-              onEditAvatar={handleEditAvatarClick}
-              onAddPlace={handleAddPlaceClick}
-              onCardClick={handleCardClick}
-              onCardLike={handleCardLike}
-              onSubmitCardDelete={handleConfirmationClick}
-              cards={cards}
-            /> */}
+          <Main
+            onEditProfile={handleEditProfileClick}
+            onEditAvatar={handleEditAvatarClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onSubmitCardDelete={handleConfirmationClick}
+            cards={cards}
+          />
           <Footer />
 
           <EditProfilePopup

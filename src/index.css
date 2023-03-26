@@ -3,9 +3,6 @@
 @import "./blocks/root/root.css";
 @import "./blocks/header/header.css";
 @import "./blocks/header/__logo/header__logo.css";
-@import "./blocks/header/__link/header__link.css";
-@import "./blocks/header/__auth/header__auth.css";
-@import "./blocks/header/__login/header__login.css";
 @import "./blocks/profile/profile.css";
 @import "./blocks/profile/__card/profile__card.css";
 @import "./blocks/profile/__avatar-container/profile__avatar-container.css";
@@ -51,9 +48,3 @@
 @import "./blocks/popup/__avatar-container/popup__avatar-container.css";
 @import "./blocks/popup/__avatar-title/popup__avatar-title.css";
 @import "./blocks/content/content.css";
-@import "./blocks/login/login.css";
-@import "./blocks/login/__title/login__title.css";
-@import "./blocks/login/__form/login__form.css";
-@import "./blocks/login/__item/login__item.css";
-@import "./blocks/login/__button/login__button.css";
-@import "./blocks/login/__link/login__link.css";
